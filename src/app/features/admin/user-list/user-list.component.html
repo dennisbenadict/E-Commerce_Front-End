@@ -1,0 +1,39 @@
+<div class="user-container">
+  <div class="user-list">
+    <h2>All Users</h2>
+    <ul>
+      <li *ngFor="let user of users" (click)="selectUser(user)">
+        <div class="user-info">
+          <span class="user-name">{{ user.name }}</span>
+          <span class="user-email">{{ user.email }}</span>
+        </div>
+        <button class="block-btn" (click)="blockUser(user); $event.stopPropagation()">
+          {{ user.isBlocked ? 'Unblock' : 'Block' }}
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="user-details" *ngIf="selectedUser">
+    <h3>{{ selectedUser.name }}</h3>
+    <p><strong>Email:</strong> {{ selectedUser.email }}</p>
+    <p><strong>Status:</strong> 
+      <span [class.blocked]="selectedUser.isBlocked">
+        {{ selectedUser.isBlocked ? 'Blocked' : 'Active' }}
+      </span>
+    </p>
+
+    <h4>Orders</h4>
+    <ul *ngIf="userOrders.length > 0; else noOrders">
+      <li *ngFor="let order of userOrders">
+        🛒 {{ order.product.name }} <span class="qty">Qty: {{ order.quantity }}</span>
+      </li>
+    </ul>
+
+    <ng-template #noOrders>
+      <p class="no-orders">No orders found for this user.</p>
+    </ng-template>
+  </div>
+</div>
+
+

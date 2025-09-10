@@ -1,0 +1,24 @@
+<div class="banner">
+  <a [routerLink]="['/products',7]">
+    <img src="assets/shoes/Nike Banner.jpg" alt="Banner">
+  </a>
+</div>
+
+<section class="product-scroll-container">
+  <div class="product-scroll-wrapper">
+    <app-product-card
+      *ngFor="let product of featuredProducts"
+      [product]="product">
+    </app-product-card>
+  </div>
+</section>
+
+<div class="banner">
+  <a [routerLink]="['/products',11]">
+    <img src="assets/shoes/Nike Bannerrr.png" alt="Banner">
+  </a>
+</div>
+
+
+
+

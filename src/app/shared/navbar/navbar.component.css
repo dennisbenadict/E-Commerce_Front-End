@@ -1,0 +1,77 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color:  #000;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 30px 40px;
+}
+
+.logo {
+  display: flex;
+  justify-content: flex-start;
+  font-family:monospace;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  flex: 1;
+}
+
+nav ul svg{
+  width: 2rem;
+  height: 2rem;
+}
+
+.nav-icons {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-icons li {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.nav-icons li:hover {
+  transform: scale(1.1);
+}
+
+.logout-btn {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: white;
+  color: black;
+}
+
+.allProducts{
+  font-family:'Segoe UI',sans-serif;
+  font-weight: bolder;
+  font-size:x-large;
+}
+
+.search-wrapper{
+  background-color: #000;
+  border-color: white;
+  color: white;
+}
+
+.search-wrapper::placeholder{
+  color: white;
+}

@@ -1,0 +1,28 @@
+<h1 class="mainHeading">VINTAGELY</h1>
+
+<div class="admin-login-container">
+  <h2>Admin Login</h2>
+  <form (ngSubmit)="login()" #adminForm="ngForm">
+    <input
+      type="email"
+      name="email"
+      [(ngModel)]="email"
+      placeholder="Admin Email"
+      required
+    />
+    <input
+      type="password"
+      name="password"
+      [(ngModel)]="password"
+      placeholder="Password"
+      required
+    />
+    <button type="submit">Login</button>
+  </form>
+
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+  <a routerLink="/login">Back to User Login</a>
+</div>
+
+

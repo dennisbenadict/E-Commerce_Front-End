@@ -1,0 +1,67 @@
+<div class="admin-product-form">
+  <h1>Manage Products</h1>
+
+  <div class="filter-section">
+    <label>Filter by Category:</label>
+    <select [(ngModel)]="selectedCategory" (change)="filterByCategory()">
+      <option value="">All</option>
+      <option value="Men">Men</option>
+      <option value="Women">Women</option>
+    </select>
+  </div>
+
+  <table class="product-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of filteredProducts">
+        <td>{{ product.name }}</td>
+        <td>{{ product.gender }}</td>
+        <td>₹{{ product.price }}</td>
+        <td>
+          <button class="edit-btn" (click)="editProduct(product)">Edit</button>
+          <button class="delete-btn" (click)="deleteProduct(product.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <div class="product-form">
+    <h2>{{ editingProduct ? 'Edit Product' : 'Add Product' }}</h2>
+
+    <input type="text" [(ngModel)]="form.name" placeholder="Product Name" />
+    <input type="text" [(ngModel)]="form.imageUrl" placeholder="Image URL" />
+    <input type="number" [(ngModel)]="form.price" placeholder="Price" />
+
+    <select [(ngModel)]="form.gender">
+      <option value="Men">Men</option>
+      <option value="Women">Women</option>
+    </select>
+
+    <textarea class="descriptionClass" [(ngModel)]="form.description" placeholder="Description"></textarea>
+
+    <input
+      class="sizesInput"
+      type="text"
+      [(ngModel)]="availableSizesInput"
+      placeholder="Available Sizes"
+      (change)="updateSizes()"
+    />
+
+    <div class="buttonOptions">
+      <button class="save-btn" (click)="saveProduct()">
+        {{ editingProduct ? 'Update' : 'Add' }}
+      </button>
+      <button class="clear-btn" (click)="clearForm()">Clear</button>
+    </div>
+  </div>
+</div>
+
+
+

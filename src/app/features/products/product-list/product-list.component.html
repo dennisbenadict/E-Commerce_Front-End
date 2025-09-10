@@ -1,0 +1,24 @@
+<div class="filters">
+  <select [(ngModel)]="selectedGender" (change)="filterProducts()">
+    <option value="">All Genders</option>
+    <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
+  </select>
+
+  <select [(ngModel)]="selectedPriceRange" (change)="filterProducts()">
+    <option value="">All Prices</option>
+    <option value="6000-8000">₹6000 - ₹8000</option>
+    <option value="8000-10000">₹8000 - ₹10000</option>
+    <option value="above10000">Above ₹10000</option>
+  </select>
+
+  <button (click)="clearFilters()">Clear</button>
+</div>
+
+<div class="product-list">
+  <app-product-card
+    *ngFor="let product of filteredProducts"
+    [product]="product">
+  </app-product-card>
+</div>
+
+

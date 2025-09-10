@@ -1,0 +1,32 @@
+<div class="admin-container">
+
+  <div class="sidebar" (mouseenter)="sidebarExpanded = true" (mouseleave)="sidebarExpanded = false">
+    <div class="sidebar-top">
+      <h3 class="brand">{{ sidebarExpanded ? 'VINTAGELY' : 'V' }}</h3>
+    </div>
+    <hr>
+    <ul class="sidebar-menu">
+      <li (click)="goToProducts()">
+        <span class="emoji">📦</span>
+        <span class="brand" *ngIf="sidebarExpanded">Manage Products</span>
+      </li>
+      <li (click)="goToUsers()">
+        <span class="emoji">🙍🏻‍♂️</span>
+        <span class="brand" *ngIf="sidebarExpanded">View Users</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <div class="admin-dashboard">
+      <h1 class="brand">Admin Dashboard</h1>
+      <div class="admin-links">
+        <button (click)="goToProducts()">Manage Products</button>
+        <button (click)="goToUsers()">View Users</button>
+      </div>
+    </div>
+    <h1 class="mainHeading">VINTAGELY</h1>
+  </div>
+</div>
+
+

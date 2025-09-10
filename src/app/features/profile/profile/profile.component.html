@@ -1,0 +1,21 @@
+<div class="profile-wrapper" *ngIf="user; else noUser">
+
+  <h1>👤 Profile</h1>
+  <div class="info-section">
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <button disabled>Change Email</button>
+    <button disabled>Change Password</button>
+    <br>
+    <button class="buttonOrder" (click)="goToOrders()">ORDERS</button>
+  </div>
+
+  <hr />
+
+</div>
+
+
+<ng-template #noUser>
+  <p style="color:white">User not found. Please log in.</p>
+</ng-template>
+

@@ -1,0 +1,32 @@
+.cart-container {
+  padding: 40px;
+  background: #000;
+  color: white;
+}
+
+.cart-item {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid #444;
+}
+
+.cart-item img {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.cart-summary {
+  text-align: right;
+  margin-top: 30px;
+}
+
+button {
+  background-color: red;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}

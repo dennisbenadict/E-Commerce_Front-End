@@ -1,0 +1,22 @@
+<div class="heading"><h1>VINTAGELY</h1></div>
+
+<div class="signup-container">
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <h2>Sign Up</h2>
+
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+    <input type="text" formControlName="name" placeholder="Full Name" />
+    <input type="email" formControlName="email" placeholder="Email" />
+    <input type="password" formControlName="password" placeholder="Password" />
+    <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" />
+
+    <button type="submit">Create Account</button>
+
+    <p class="signup-link">
+      Already have an account?
+      <a routerLink="/auth/login">Login</a>
+    </p>
+  </form>
+</div>
+

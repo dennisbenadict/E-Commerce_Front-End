@@ -1,0 +1,45 @@
+<nav class="navbar">
+  <div class="logo">VINTAGELY</div>
+  <ul class="nav-icons">
+    <li>
+    <a (click)="goToAllProducts()" class="allProducts">All Products</a>
+    </li>
+  <li class="search-wrapper">
+  <input class="search-wrapper"
+    type="text"
+    [(ngModel)]="searchQuery"
+    placeholder="Search Products..."
+    (keydown.enter)="search()"
+  />
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="lucide lucide-search-icon"
+    (click)="search()"
+    style="cursor:pointer;"
+  >
+    <path d="m21 21-4.34-4.34" />
+    <circle cx="11" cy="11" r="8" />
+  </svg>
+  </li>
+
+    <li (click)="goToProfile()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round-icon lucide-circle-user-round"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg>
+    </li>
+    <li (click)="goToCart()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart-icon lucide-shopping-cart"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+    </li>
+    <li *ngIf="isLoggedIn">
+    
+    </li>
+  </ul>
+  <button *ngIf="isLoggedIn" class="logout-btn" (click)="logout()">Logout</button>
+</nav>
+

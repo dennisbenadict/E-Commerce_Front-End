@@ -1,0 +1,25 @@
+<div class="heading"><h1>VINTAGELY</h1></div>
+<div class="login-container">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h2>Login</h2>
+<input type="email" formControlName="email" placeholder="Email" />
+    <input type="password" formControlName="password" placeholder="Password" />
+
+    <button type="submit">Login</button>
+    <br>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+    <p class="signup-link">
+      Don't have an account?
+      <a routerLink="/auth/signup">Sign up</a>
+      <br>
+      <br>
+
+        <a routerLink="/auth/signup">Forgot Password</a>
+        <br><br>
+        <a routerLink="/admin/admin-login">Admin Login</a>
+    </p>
+
+  </form>
+</div>
+

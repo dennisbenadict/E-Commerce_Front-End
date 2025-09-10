@@ -1,0 +1,53 @@
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  padding: 40px;
+  background-color:wheat;
+}
+app-product-card{
+    cursor: pointer;
+}
+.filters {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: wheat;
+}
+
+.filters select,
+.filters button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 20px;
+  background-color: #ffffff;
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.filters select:focus,
+.filters button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #888;
+}
+
+.filters select:hover,
+.filters button:hover {
+  background-color: #f0f0f0;
+}
+
+.filters button {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.filters button:hover {
+  background-color: #e60000;
+}
+
+

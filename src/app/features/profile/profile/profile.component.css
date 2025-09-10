@@ -1,0 +1,47 @@
+.profile-wrapper {
+  background-color: #000;
+  color: white;
+  padding: 40px;
+  font-family: 'Poppins', sans-serif;
+  min-height: 90vh;
+}
+
+h1, h2 {
+  color: red;
+  text-align: center;
+}
+
+.info-section {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.info-section p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.info-section button {
+  margin: 10px 5px;
+  padding: 10px 15px;
+  background-color: red;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.orders-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.order-card {
+  border: 1px solid #444;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #111;
+}
