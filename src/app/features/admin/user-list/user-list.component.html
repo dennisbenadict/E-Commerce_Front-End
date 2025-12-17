@@ -24,11 +24,24 @@
     </p>
 
     <h4>Orders</h4>
-    <ul *ngIf="userOrders.length > 0; else noOrders">
-      <li *ngFor="let order of userOrders">
-        🛒 {{ order.product.name }} <span class="qty">Qty: {{ order.quantity }}</span>
-      </li>
-    </ul>
+    <table *ngIf="userOrders.length; else noOrders" class="orders-table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let o of userOrders">
+          <td>{{ o.id ?? o.Id }}</td>
+          <td>₹{{ o.totalAmount ?? o.TotalAmount }}</td>
+          <td>{{ o.status ?? o.Status }}</td>
+          <td>{{ o.createdAt ?? o.CreatedAt }}</td>
+        </tr>
+      </tbody>
+    </table>
 
     <ng-template #noOrders>
       <p class="no-orders">No orders found for this user.</p>

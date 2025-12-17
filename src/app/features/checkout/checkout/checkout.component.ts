@@ -11,12 +11,13 @@ import { AddressService } from 'src/app/core/address.service';
 })
 export class CheckoutComponent implements OnInit {
   totalAmount: number = 0;
-  address: any = null;
+  addresses: any[] = [];
+  selectedAddressId: number | null = null;
   paymentMethod: string = 'Credit Card';
 
   constructor(
     private cartService: CartService,
-    private router: Router,
+    public router: Router,
     private orderService:OrdersService,
     private toastrService:ToastrService,
     private addressService: AddressService
@@ -32,13 +33,38 @@ export class CheckoutComponent implements OnInit {
   private loadAddress() {
     this.addressService.getAddresses().subscribe({
       next: (res) => {
-        const addresses = res.addresses || res;
-        this.address = addresses && addresses.length ? addresses[0] : null;
+        const list = (res.addresses ?? res ?? []) as any[];
+        this.addresses = list.map(a => this.mapAddress(a));
+        const stored = localStorage.getItem('selectedAddressId');
+        const storedId = stored ? Number(stored) : null;
+        if (this.addresses.length) {
+          this.selectedAddressId = this.addresses.some(a => a.id === storedId)
+            ? storedId
+            : this.addresses[0].id;
+        }
       },
       error: () => {
-        this.address = null;
+        this.addresses = [];
+        this.selectedAddressId = null;
       }
     });
+  }
+
+  get selectedAddress() {
+    return this.addresses.find(a => a.id === this.selectedAddressId) || null;
+  }
+
+  private mapAddress(a: any) {
+    return {
+      id: a.id ?? a.Id,
+      name: a.fullName ?? a.FullName ?? a.name ?? '',
+      phone: a.phone ?? a.Phone ?? '',
+      street: a.street ?? a.Street ?? '',
+      city: a.city ?? a.City ?? '',
+      state: a.state ?? a.State ?? '',
+      pincode: a.zipCode ?? a.ZipCode ?? a.pincode ?? a.Pincode ?? '',
+      country: a.country ?? a.Country ?? ''
+    };
   }
 
   placeOrder() {

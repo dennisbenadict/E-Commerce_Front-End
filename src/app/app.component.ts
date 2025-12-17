@@ -7,13 +7,15 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent {
   title = 'ecommerce';
-    showLayout=true;
+  showLayout=true;
 
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        const hiddenRoutes = ['/auth/login','/auth/signup','/admin','/admin/order-list','/admin/product-form','/admin/user-list','/admin/admin-login'];
-        this.showLayout = !hiddenRoutes.includes(event.urlAfterRedirects);
+        const url = event.urlAfterRedirects;
+        const hideForAuth = url.startsWith('/auth/login') || url.startsWith('/auth/signup');
+        const hideForAdmin = url.startsWith('/admin');
+        this.showLayout = !(hideForAuth || hideForAdmin);
       }
     });
   }

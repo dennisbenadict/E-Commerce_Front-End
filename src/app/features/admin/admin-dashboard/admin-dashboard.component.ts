@@ -14,6 +14,12 @@ export class AdminDashboardComponent {
     goToUsers(){
     this.router.navigate(['/admin/user-list'])
   }
+  goToOrders(){
+    this.router.navigate(['/admin/orders'])
+  }
+  goToCategories(){
+    this.router.navigate(['/admin/categories'])
+  }
 }
 
 

@@ -1,0 +1,36 @@
+<div class="admin-categories">
+  <h1>Categories</h1>
+
+  <div class="category-form">
+    <input type="text" [(ngModel)]="nameInput" placeholder="Category name">
+    <div class="buttons">
+      <button (click)="save()">{{ editingId ? 'Update' : 'Add' }}</button>
+      <button class="secondary" (click)="cancelEdit()">Clear</button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading">Loading...</div>
+
+  <table *ngIf="!loading && categories.length" class="category-table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cat of categories">
+        <td>{{ cat.id }}</td>
+        <td>{{ cat.name }}</td>
+        <td>
+          <button (click)="startEdit(cat)">Edit</button>
+          <button class="danger" (click)="delete(cat)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && !categories.length" class="empty">No categories found.</div>
+</div>
+

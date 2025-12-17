@@ -26,4 +26,8 @@ export class OrdersService {
   cancelOrder(id: number): Observable<any> {
     return this.http.put(`${this.api}/api/orders/${id}/cancel`, {});
   }
+
+  adminCancelOrder(id: number): Observable<any> {
+    return this.http.put(`${this.api}/api/orders/${id}/admin-cancel`, {});
+  }
 }

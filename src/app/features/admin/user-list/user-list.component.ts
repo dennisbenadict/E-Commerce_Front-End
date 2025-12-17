@@ -1,6 +1,7 @@
 import { Component,OnInit} from '@angular/core';
 import { AuthService } from 'src/app/core/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { OrdersService } from 'src/app/core/order.service';
 
 @Component({
   selector: 'app-user-list',
@@ -15,7 +16,8 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private ordersService: OrdersService
   ) {}
 
   ngOnInit() {
@@ -36,6 +38,7 @@ export class UserListComponent implements OnInit {
   selectUser(user:any) {
     this.selectedUser = user;
     this.userOrders = [];
+    this.loadUserOrders(user.id ?? user.Id);
   }
 
   blockUser(user: any) {
@@ -46,6 +49,18 @@ export class UserListComponent implements OnInit {
         this.loadUsers();
       },
       error: (err) => this.toastr.error(err.error?.message || 'Action failed')
+    });
+  }
+
+  private loadUserOrders(userId: number) {
+    this.ordersService.getAllOrders().subscribe({
+      next: (res: any) => {
+        const list = res.orders ?? res ?? [];
+        this.userOrders = (list as any[]).filter(o => (o.userId ?? o.UserId) === userId);
+      },
+      error: () => {
+        this.userOrders = [];
+      }
     });
   }
 }

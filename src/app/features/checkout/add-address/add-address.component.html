@@ -1,15 +1,36 @@
-<div class="address-form">
-  <h2>Add Delivery Address</h2>
-  <form (submit)="saveAddress()">
-    <input type="text" [(ngModel)]="name" name="name" placeholder="Full Name" required />
-    <input type="text" [(ngModel)]="phone" name="phone" placeholder="Phone Number" required />
-    <input type="text" [(ngModel)]="street" name="street" placeholder="Street / Apartment" required />
-    <input type="text" [(ngModel)]="city" name="city" placeholder="City" required />
-    <input type="text" [(ngModel)]="pincode" name="pincode" placeholder="Pincode" required />
-    <input type="text" [(ngModel)]="state" name="state" placeholder="State" required />
-    
-    <button type="submit">Deliver Here</button>
-  </form>
+<div class="address-page">
+  <h2>Select or Add Address</h2>
+
+  <div class="address-list" *ngIf="addresses.length; else noAddress">
+    <div class="address-card" *ngFor="let a of addresses">
+      <div>
+        <p><strong>{{ a.fullName }}</strong></p>
+        <p>{{ a.street }}, {{ a.city }}</p>
+        <p>{{ a.state }} - {{ a.zipCode }}</p>
+        <p class="phone">Phone: {{ a.phone }}</p>
+      </div>
+      <div class="actions">
+        <button type="button" (click)="useAddress(a.id)">Deliver Here</button>
+      </div>
+    </div>
+  </div>
+  <ng-template #noAddress>
+    <p>No saved addresses yet.</p>
+  </ng-template>
+
+  <div class="divider"></div>
+
+  <div class="address-form">
+    <h3>Add Delivery Address</h3>
+    <form (submit)="saveAddress()">
+      <input type="text" [(ngModel)]="name" name="name" placeholder="Full Name" required />
+      <input type="text" [(ngModel)]="phone" name="phone" placeholder="Phone Number" required />
+      <input type="text" [(ngModel)]="street" name="street" placeholder="Street / Apartment" required />
+      <input type="text" [(ngModel)]="city" name="city" placeholder="City" required />
+      <input type="text" [(ngModel)]="pincode" name="pincode" placeholder="Pincode" required />
+      <input type="text" [(ngModel)]="state" name="state" placeholder="State" required />
+      
+      <button type="submit">Save & Deliver Here</button>
+    </form>
+  </div>
 </div>
-
-

@@ -32,6 +32,48 @@
     </div>
   </div>
 
+  <hr />
+
+  <div class="address-section">
+    <h2>Addresses</h2>
+
+    <div class="address-list" *ngIf="addresses.length; else noAddress">
+      <div class="address-card" *ngFor="let a of addresses">
+        <div>
+          <p><strong>{{ a.fullName }}</strong></p>
+          <p>{{ a.street }}, {{ a.city }}</p>
+          <p>{{ a.state }} - {{ a.zipCode }}</p>
+          <p class="phone">Phone: {{ a.phone }}</p>
+        </div>
+        <div class="address-actions">
+          <button (click)="selectedAddressId = a.id">Use</button>
+          <button (click)="editAddress(a)">Edit</button>
+          <button class="danger" (click)="deleteAddress(a.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+    <ng-template #noAddress>
+      <p style="color:white">No addresses found.</p>
+    </ng-template>
+
+    <div class="form-section address-form">
+      <h3>{{ addressForm.id ? 'Update Address' : 'Add Address' }}</h3>
+      <input type="text" [(ngModel)]="addressForm.fullName" placeholder="Full Name">
+      <input type="tel" [(ngModel)]="addressForm.phone" placeholder="Phone">
+      <input type="text" [(ngModel)]="addressForm.street" placeholder="Street">
+      <input type="text" [(ngModel)]="addressForm.city" placeholder="City">
+      <input type="text" [(ngModel)]="addressForm.state" placeholder="State">
+      <input type="text" [(ngModel)]="addressForm.zipCode" placeholder="Zip Code">
+      <input type="text" [(ngModel)]="addressForm.country" placeholder="Country">
+      <div class="address-actions">
+        <button (click)="saveAddress()" [disabled]="savingAddress">
+          {{ savingAddress ? 'Saving...' : 'Save Address' }}
+        </button>
+        <button class="secondary" (click)="resetAddressForm()">Clear</button>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 

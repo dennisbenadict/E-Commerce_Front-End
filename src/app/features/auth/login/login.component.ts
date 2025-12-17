@@ -39,7 +39,12 @@ export class LoginComponent {
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Login failed';
-        this.toastr.error(this.errorMessage, 'Login Failed');
+        const msg = (this.errorMessage || '').toLowerCase();
+        if (err.status === 403 || msg.includes('blocked') || msg.includes('not allowed')) {
+          this.toastr.error('You have been blocked by admin', 'Login Failed');
+        } else {
+          this.toastr.error(this.errorMessage, 'Login Failed');
+        }
         this.loading = false;
       },
       complete: () => this.loading = false

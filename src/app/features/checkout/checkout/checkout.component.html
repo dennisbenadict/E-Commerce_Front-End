@@ -1,11 +1,20 @@
 <h2>Checkout</h2>
 
-<div class="delivery-address" *ngIf="address">
+<div class="delivery-address">
   <h3>Delivery Address</h3>
-  <p><strong>{{ address.name }}</strong></p>
-  <p>{{ address.street }}, {{ address.city }}</p>
-  <p>{{ address.state }} - {{ address.pincode }}</p>
-  <p class="phone">Phone: {{ address.phone }}</p>
+
+  <div *ngIf="selectedAddress; else noAddress">
+    <p><strong>{{ selectedAddress?.name }}</strong></p>
+    <p>{{ selectedAddress?.street }}, {{ selectedAddress?.city }}</p>
+    <p>{{ selectedAddress?.state }} - {{ selectedAddress?.pincode }}</p>
+    <p class="phone">Phone: {{ selectedAddress?.phone }}</p>
+  </div>
+
+  <ng-template #noAddress>
+    <p>No address found. Please add one.</p>
+  </ng-template>
+
+  <button class="add-btn" (click)="router.navigate(['/checkout/address'])">Add Address</button>
 </div>
 
 <h3>Select Payment Method</h3>

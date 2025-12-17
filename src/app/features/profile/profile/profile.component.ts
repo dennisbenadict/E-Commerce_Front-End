@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProfileService } from 'src/app/core/profile.service';
 import { ToastrService } from 'ngx-toastr';
+import { AddressService } from 'src/app/core/address.service';
 
 @Component({
   selector: 'app-profile',
@@ -26,14 +27,30 @@ export class ProfileComponent implements OnInit {
     confirmPassword: ''
   };
 
+  addresses: any[] = [];
+  addressForm = {
+    id: null as number | null,
+    fullName: '',
+    phone: '',
+    street: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    country: 'India'
+  };
+  savingAddress = false;
+  selectedAddressId: number | null = null;
+
   constructor(
     private router:Router,
     private profileService: ProfileService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private addressService: AddressService
   ){}
 
   ngOnInit() {
     this.loadProfile();
+    this.loadAddresses();
   }
 
   private loadProfile() {
@@ -104,6 +121,100 @@ export class ProfileComponent implements OnInit {
         this.toastr.error(err.error?.message || 'Password change failed');
       },
       complete: () => this.changingPassword = false
+    });
+  }
+
+  private loadAddresses() {
+    this.addressService.getAddresses().subscribe({
+      next: (res) => {
+        const list = (res.addresses ?? res ?? []) as any[];
+        this.addresses = list.map(a => this.mapAddress(a));
+        if (this.addresses.length) {
+          this.selectedAddressId = this.addresses[0].id;
+        } else {
+          this.selectedAddressId = null;
+        }
+      },
+      error: () => {
+        this.addresses = [];
+        this.selectedAddressId = null;
+      }
+    });
+  }
+
+  private mapAddress(a: any) {
+    return {
+      id: a.id ?? a.Id,
+      fullName: a.fullName ?? a.FullName ?? a.name ?? '',
+      phone: a.phone ?? a.Phone ?? '',
+      street: a.street ?? a.Street ?? '',
+      city: a.city ?? a.City ?? '',
+      state: a.state ?? a.State ?? '',
+      zipCode: a.zipCode ?? a.ZipCode ?? a.pincode ?? a.Pincode ?? '',
+      country: a.country ?? a.Country ?? ''
+    };
+  }
+
+  editAddress(addr: any) {
+    this.addressForm = { ...addr };
+  }
+
+  resetAddressForm() {
+    this.addressForm = {
+      id: null,
+      fullName: '',
+      phone: '',
+      street: '',
+      city: '',
+      state: '',
+      zipCode: '',
+      country: 'India'
+    };
+  }
+
+  saveAddress() {
+    if (this.savingAddress) return;
+    if (!this.addressForm.fullName || !this.addressForm.street || !this.addressForm.city) {
+      this.toastr.error('Name, street, city are required');
+      return;
+    }
+    this.savingAddress = true;
+    const payload = {
+      FullName: this.addressForm.fullName,
+      Phone: this.addressForm.phone,
+      Street: this.addressForm.street,
+      City: this.addressForm.city,
+      State: this.addressForm.state,
+      ZipCode: this.addressForm.zipCode,
+      Country: this.addressForm.country
+    };
+
+    const req = this.addressForm.id
+      ? this.addressService.updateAddress(this.addressForm.id, payload)
+      : this.addressService.createAddress(payload);
+
+    req.subscribe({
+      next: () => {
+        this.toastr.success('Address saved');
+        this.resetAddressForm();
+        this.loadAddresses();
+      },
+      error: (err) => {
+        this.toastr.error(err.error?.message || 'Address save failed');
+      },
+      complete: () => this.savingAddress = false
+    });
+  }
+
+  deleteAddress(id: number) {
+    this.addressService.deleteAddress(id).subscribe({
+      next: () => {
+        this.toastr.success('Address deleted');
+        this.loadAddresses();
+      },
+      error: (err) => {
+        this.toastr.error(err.error?.message || 'Delete failed');
+      }
     });
   }
 }

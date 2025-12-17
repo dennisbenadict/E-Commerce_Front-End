@@ -1,3 +1,73 @@
+.address-page {
+  padding: 16px;
+  color: inherit;
+}
+
+.address-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.address-card {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  background: #fff;
+}
+
+.address-card .phone {
+  color: #555;
+}
+
+.actions button {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #1976d2;
+  color: #fff;
+  cursor: pointer;
+}
+
+.divider {
+  height: 1px;
+  background: #e0e0e0;
+  margin: 16px 0;
+}
+
+.address-form {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  background: #fff;
+}
+
+.address-form h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.address-form input {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #222;
+}
+
+.address-form button {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #1976d2;
+  color: #fff;
+  cursor: pointer;
+  width: 100%;
+}
 .address-form {
   max-width: 500px;
   margin: 40px auto;

@@ -9,6 +9,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./add-address.component.css']
 })
 export class AddAddressComponent {
+  addresses: any[] = [];
+  selectedAddressId: number | null = null;
   name = '';
   phone = '';
   street = '';
@@ -22,6 +24,40 @@ export class AddAddressComponent {
     private addressService: AddressService,
     private toastr: ToastrService
   ) {}
+
+  ngOnInit() {
+    this.loadAddresses();
+  }
+
+  private loadAddresses() {
+    this.addressService.getAddresses().subscribe({
+      next: (res) => {
+        const list = (res.addresses ?? res ?? []) as any[];
+        this.addresses = list.map(a => this.mapAddress(a));
+      },
+      error: () => {
+        this.addresses = [];
+      }
+    });
+  }
+
+  private mapAddress(a: any) {
+    return {
+      id: a.id ?? a.Id,
+      fullName: a.fullName ?? a.FullName ?? a.name ?? '',
+      phone: a.phone ?? a.Phone ?? '',
+      street: a.street ?? a.Street ?? '',
+      city: a.city ?? a.City ?? '',
+      state: a.state ?? a.State ?? '',
+      zipCode: a.zipCode ?? a.ZipCode ?? a.pincode ?? a.Pincode ?? '',
+      country: a.country ?? a.Country ?? ''
+    };
+  }
+
+  useAddress(id: number) {
+    localStorage.setItem('selectedAddressId', String(id));
+    this.router.navigate(['/checkout']);
+  }
 
   saveAddress() {
     if (this.saving) return;

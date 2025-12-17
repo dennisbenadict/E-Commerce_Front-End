@@ -14,6 +14,14 @@
         <span class="emoji">🙍🏻‍♂️</span>
         <span class="brand" *ngIf="sidebarExpanded">View Users</span>
       </li>
+      <li (click)="goToOrders()">
+        <span class="emoji">🧾</span>
+        <span class="brand" *ngIf="sidebarExpanded">View Orders</span>
+      </li>
+      <li (click)="goToCategories()">
+        <span class="emoji">🏷️</span>
+        <span class="brand" *ngIf="sidebarExpanded">View Categories</span>
+      </li>
     </ul>
   </div>
 
@@ -23,6 +31,8 @@
       <div class="admin-links">
         <button (click)="goToProducts()">Manage Products</button>
         <button (click)="goToUsers()">View Users</button>
+        <button (click)="goToOrders()">View Orders</button>
+        <button (click)="goToCategories()">View Categories</button>
       </div>
     </div>
     <h1 class="mainHeading">VINTAGELY</h1>

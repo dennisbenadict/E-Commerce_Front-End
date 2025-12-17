@@ -1,12 +1,11 @@
 <div class="orders" *ngIf="orders.length; else noOrders">
   <h2>My Orders</h2>
-  <div *ngFor="let item of orders" class="order-card">
-    <img [src]="item.product.imageUrl" alt="{{ item.product.name }}" />
+  <div *ngFor="let o of orders" class="order-card">
     <div>
-      <h3>{{ item.product.name }}</h3>
-      <p>₹{{ item.product.price }}</p>
-      <p>Quantity: {{ item.quantity }}</p>
-      <hr>
+      <h3>Order #{{ o.id ?? o.Id }}</h3>
+      <p>Total: ₹{{ o.totalAmount ?? o.TotalAmount }}</p>
+      <p>Status: {{ o.status ?? o.Status }}</p>
+      <p>Placed: {{ o.createdAt ?? o.CreatedAt }}</p>
     </div>
   </div>
 </div>
