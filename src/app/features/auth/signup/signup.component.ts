@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -11,51 +12,47 @@ import { ToastrService } from 'ngx-toastr';
 export class SignupComponent {
   signupForm: FormGroup;
   errorMessage: string = '';
+  loading = false;
   
-  constructor(private fb: FormBuilder, private router: Router,private toastr:ToastrService) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private toastr:ToastrService,
+    private authService: AuthService
+  ) {
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
     });
   }
 
   onSubmit() {
-    if (this.signupForm.invalid) return;
+    if (this.signupForm.invalid || this.loading) return;
 
-    const { name, email, password, confirmPassword } = this.signupForm.value;
+    const { name, email, phone, password, confirmPassword } = this.signupForm.value;
 
     if (password !== confirmPassword) {
       this.toastr.error("Passwords do not match");
       return;
     }
 
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    this.loading = true;
 
-    const existingUser = users.find((u: any) => u.email === email);
-    if (existingUser) {
-      this.toastr.error("User already exists. Please login.");
-      return;
-    }
-
-    const newUser = {
-      id: Date.now(),
-      name,
-      email,
-      password,
-      isBlocked: false,
-      orders: []
-    };
-
-    users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
-
-    localStorage.setItem('isLoggedIn', 'true');
-    localStorage.setItem('user', JSON.stringify(newUser));
-    localStorage.setItem('currentUser', JSON.stringify(newUser));
-
-    this.router.navigate(['/auth/login']);
+    this.authService.register({ name, email, phone, password }).subscribe({
+      next: () => {
+        this.toastr.success('Registration successful! Please login.');
+        this.router.navigate(['/auth/login']);
+      },
+      error: (err) => {
+        this.errorMessage = err.error?.message || 'Registration failed';
+        this.toastr.error(this.errorMessage);
+        this.loading = false;
+      },
+      complete: () => this.loading = false
+    });
   }
 }
 

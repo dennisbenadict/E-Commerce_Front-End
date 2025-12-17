@@ -1,11 +1,11 @@
 <div class="cart-container" *ngIf="cartItems.length; else empty">
   <div class="cart-item" *ngFor="let item of cartItems">
-    <img [src]="item.product.imageUrl" alt="{{ item.product.name }}">
+    <img [src]="item.imageUrls && item.imageUrls.length ? item.imageUrls[0] : ''" alt="{{ item.productName }}">
     <div>
-      <h3>{{ item.product.name }}</h3>
-      <p>₹{{ item.product.price }}</p>
+      <h3>{{ item.productName }}</h3>
+      <p>₹{{ item.price }}</p>
       <p>Qty: {{ item.quantity }}</p>
-      <button (click)="removeItem(item.product.id)">Remove</button>
+      <button (click)="removeItem(item.productId)">Remove</button>
     </div>
   </div>
 

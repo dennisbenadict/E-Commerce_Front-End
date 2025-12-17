@@ -3,6 +3,7 @@ import { CartService } from 'src/app/core/cart.service';
 import { Router } from '@angular/router';
 import { OrdersService } from 'src/app/core/order.service';
 import { ToastrService } from 'ngx-toastr';
+import { AddressService } from 'src/app/core/address.service';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -13,16 +14,31 @@ export class CheckoutComponent implements OnInit {
   address: any = null;
   paymentMethod: string = 'Credit Card';
 
-  constructor(private cartService: CartService, private router: Router,private orderService:OrdersService,private toastrService:ToastrService) {}
+  constructor(
+    private cartService: CartService,
+    private router: Router,
+    private orderService:OrdersService,
+    private toastrService:ToastrService,
+    private addressService: AddressService
+  ) {}
 
   ngOnInit() {
-    const cartItems = this.cartService.getCartItems();
-    console.log('Cart items in checkout:', cartItems);
-    this.totalAmount = this.cartService.getTotal();
-    const storedAddress = localStorage.getItem('userAddress');
-    if (storedAddress) {
-      this.address = JSON.parse(storedAddress);
-    }
+    this.cartService.cartItems$.subscribe(items => {
+      this.totalAmount = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
+    });
+    this.loadAddress();
+  }
+
+  private loadAddress() {
+    this.addressService.getAddresses().subscribe({
+      next: (res) => {
+        const addresses = res.addresses || res;
+        this.address = addresses && addresses.length ? addresses[0] : null;
+      },
+      error: () => {
+        this.address = null;
+      }
+    });
   }
 
   placeOrder() {
@@ -30,12 +46,16 @@ export class CheckoutComponent implements OnInit {
       alert('Please select a payment method');
       return;
     }
-    const items = this.cartService.getCartItems();
-    this.orderService.saveOrder(items);
-    this.toastrService.success('Order Placed Successfully')
-    this.cartService.clearCart();
-    this.router.navigate(['/orders']);
+    this.orderService.createOrder().subscribe({
+      next: () => {
+        this.toastrService.success('Order Placed Successfully');
+        this.cartService.clearCart();
+        this.cartService.refreshCart();
+        this.router.navigate(['/orders']);
+      },
+      error: (err) => {
+        this.toastrService.error(err.error?.message || 'Failed to place order');
+      }
+    });
   }
 }
-
-

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder,FormGroup,Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,34 +12,37 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string = '';
+  loading = false;
 
-  constructor(private fb: FormBuilder,private router:Router,private toastr:ToastrService) {
+  constructor(
+    private fb: FormBuilder,
+    private router:Router,
+    private toastr:ToastrService,
+    private authService: AuthService
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
-onSubmit() {
-  if (this.loginForm.invalid) return;
 
-  const { email, password } = this.loginForm.value;
-  const users = JSON.parse(localStorage.getItem('users') || '[]');
-  const user = users.find((u: any) => u.email === email && u.password === password);
+  onSubmit() {
+    if (this.loginForm.invalid || this.loading) return;
+    this.loading = true;
 
-  if (!user) {
-    this.toastr.success('Invalid email or password', 'Login Failed');
-    return;
+    const { email, password } = this.loginForm.value;
+
+    this.authService.login({ email, password }).subscribe({
+      next: () => {
+        this.toastr.success('Login successful!', 'Welcome');
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        this.errorMessage = err.error?.message || 'Login failed';
+        this.toastr.error(this.errorMessage, 'Login Failed');
+        this.loading = false;
+      },
+      complete: () => this.loading = false
+    });
   }
-
-  if (user.isBlocked) {
-    this.toastr.warning('You are blocked by the admin', 'Access Denied');
-    return;
-  }
-
-  localStorage.setItem('isLoggedIn', 'true');
-  localStorage.setItem('currentUser', JSON.stringify(user));
-  this.toastr.success('Login successful!', 'Welcome');
-  this.router.navigate(['/']);
-}
-
 }

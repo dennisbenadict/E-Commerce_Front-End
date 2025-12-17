@@ -4,11 +4,12 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { ProductFormComponent } from './product-form/product-form.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { adminGuard } from 'src/app/core/admin.guard';
 
 const routes: Routes = [
-  {path:'',component:AdminDashboardComponent},
-  {path:'product-form',component:ProductFormComponent},
-  {path:'user-list',component:UserListComponent},
+  {path:'',component:AdminDashboardComponent, canActivate:[adminGuard]},
+  {path:'product-form',component:ProductFormComponent, canActivate:[adminGuard]},
+  {path:'user-list',component:UserListComponent, canActivate:[adminGuard]},
   {path:'admin-login',component:AdminLoginComponent}
 ];
 

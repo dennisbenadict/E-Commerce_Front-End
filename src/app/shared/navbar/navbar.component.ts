@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PRODUCTS } from '../data/product';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,46 +8,46 @@ import { PRODUCTS } from '../data/product';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  isLoggedIn: boolean = false;
   searchQuery: string = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  }
+
+  get isLoggedIn(): boolean {
+    return this.authService.isAuthenticated();
   }
 
   logout() {
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('loggedInUser');
-    this.isLoggedIn = false;
-    this.router.navigate(['/auth/login']);
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/auth/login']);
+      },
+      error: () => {
+        this.router.navigate(['/auth/login']);
+      }
+    });
   }
 
   goToProfile(){
-    this.router.navigate(['/profile'])
+    this.router.navigate(['/profile']);
   }
 
   goToCart(){
-    this.router.navigate(['/cart'])
+    this.router.navigate(['/cart']);
   }
 
   goToAllProducts(){
-    this.router.navigate(['/products'])
+    this.router.navigate(['/products']);
   }
 
   search() {
     const trimmedQuery = this.searchQuery.trim().toLowerCase();
-
-    const foundProduct = PRODUCTS.find(p =>
-      p.name.toLowerCase().includes(trimmedQuery)
-    );
-
-    if (foundProduct) {
-      this.router.navigate(['/products', foundProduct.id]);
-    } else {
-      alert('Product not found');
-    }
+    this.router.navigate(['/products'], { queryParams: { search: trimmedQuery }});
     this.searchQuery = '';
   }
 }

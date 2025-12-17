@@ -4,13 +4,33 @@
   <div class="info-section">
     <p><strong>Name:</strong> {{ user.name }}</p>
     <p><strong>Email:</strong> {{ user.email }}</p>
-    <button disabled>Change Email</button>
-    <button disabled>Change Password</button>
-    <br>
+    <p><strong>Phone:</strong> {{ user.phone }}</p>
     <button class="buttonOrder" (click)="goToOrders()">ORDERS</button>
   </div>
 
   <hr />
+
+  <div class="form-row">
+    <div class="form-section">
+      <h2>Update Profile</h2>
+      <input type="text" [(ngModel)]="profileForm.name" placeholder="Name">
+      <input type="email" [(ngModel)]="profileForm.email" placeholder="Email">
+      <input type="tel" [(ngModel)]="profileForm.phone" placeholder="Phone">
+      <button (click)="updateProfile()" [disabled]="savingProfile">
+        {{ savingProfile ? 'Saving...' : 'Save Profile' }}
+      </button>
+    </div>
+
+    <div class="form-section">
+      <h2>Change Password</h2>
+      <input type="password" [(ngModel)]="passwordForm.currentPassword" placeholder="Current Password">
+      <input type="password" [(ngModel)]="passwordForm.newPassword" placeholder="New Password">
+      <input type="password" [(ngModel)]="passwordForm.confirmPassword" placeholder="Confirm New Password">
+      <button (click)="changePassword()" [disabled]="changingPassword">
+        {{ changingPassword ? 'Updating...' : 'Change Password' }}
+      </button>
+    </div>
+  </div>
 
 </div>
 

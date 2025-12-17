@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/core/models/product.model';
-import { PRODUCTS } from 'src/app/shared/data/product';
+import { ProductService } from 'src/app/core/product.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-list',
@@ -9,7 +10,7 @@ import { PRODUCTS } from 'src/app/shared/data/product';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  products: Product[] = PRODUCTS;
+  products: Product[] = [];
   filteredProducts: Product[] = [];
 
   genders: string[] = ['Men', 'Women'];
@@ -17,14 +18,32 @@ export class ProductListComponent implements OnInit {
   selectedPriceRange: string = '';
   searchQuery: string = '';
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private productService: ProductService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
+    this.loadProducts();
+
     this.route.queryParams.subscribe(params => {
       this.searchQuery = params['search']?.toLowerCase() || '';
       this.applyFilters();
     });
-    this.filteredProducts = [...this.products];
+  }
+
+  private loadProducts() {
+    this.productService.getProducts().subscribe({
+      next: (res) => {
+        this.products = res;
+        this.filteredProducts = [...this.products];
+        this.applyFilters();
+      },
+      error: () => {
+        this.toastr.error('Failed to load products');
+      }
+    });
   }
 
   applyFilters() {

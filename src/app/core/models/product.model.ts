@@ -4,6 +4,8 @@ export interface Product{
     description:string,
     price:number,
     imageUrl:string,
-    availableSizes:string[]
-    gender:string
+    availableSizes:string[],
+    gender:string,
+    categoryId?: number,
+    imageUrls?: string[]
 }

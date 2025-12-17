@@ -5,8 +5,7 @@
     <label>Filter by Category:</label>
     <select [(ngModel)]="selectedCategory" (change)="filterByCategory()">
       <option value="">All</option>
-      <option value="Men">Men</option>
-      <option value="Women">Women</option>
+      <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
     </select>
   </div>
 
@@ -14,6 +13,7 @@
     <thead>
       <tr>
         <th>Name</th>
+        <th>Category</th>
         <th>Gender</th>
         <th>Price</th>
         <th>Actions</th>
@@ -22,6 +22,7 @@
     <tbody>
       <tr *ngFor="let product of filteredProducts">
         <td>{{ product.name }}</td>
+        <td>{{ product['categoryId'] }}</td>
         <td>{{ product.gender }}</td>
         <td>₹{{ product.price }}</td>
         <td>
@@ -36,7 +37,12 @@
     <h2>{{ editingProduct ? 'Edit Product' : 'Add Product' }}</h2>
 
     <input type="text" [(ngModel)]="form.name" placeholder="Product Name" />
-    <input type="text" [(ngModel)]="form.imageUrl" placeholder="Image URL" />
+    <select [(ngModel)]="form['categoryId']">
+      <option [ngValue]="null">Select Category</option>
+      <option *ngFor="let cat of categories" [ngValue]="cat.id">{{ cat.name }}</option>
+    </select>
+
+    <input type="text" [(ngModel)]="imageUrlsInput" placeholder="Image URLs (comma separated)" />
     <input type="number" [(ngModel)]="form.price" placeholder="Price" />
 
     <select [(ngModel)]="form.gender">

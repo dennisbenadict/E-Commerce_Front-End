@@ -1,35 +1,29 @@
 import { Injectable } from '@angular/core';
-import { CartItem } from './cart.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrdersService {
-  private ordersKey = 'userOrders';
+  private readonly api = environment.apiUrl;
 
-getOrders(): any[] {
-  const currentUser = JSON.parse(localStorage.getItem('currentUser')!);
-  const allOrders = JSON.parse(localStorage.getItem('orders') || '{}');
+  constructor(private http: HttpClient) { }
 
-  return allOrders[currentUser?.email] || [];
-}
+  createOrder(): Observable<any> {
+    return this.http.post(`${this.api}/api/orders`, {});
+  }
 
+  getMyOrders(): Observable<any> {
+    return this.http.get(`${this.api}/api/orders/my`);
+  }
 
-saveOrder(items: any[]) {
-  const currentUser = JSON.parse(localStorage.getItem('currentUser')!);
-  const allOrders = JSON.parse(localStorage.getItem('orders') || '{}');
+  getAllOrders(): Observable<any> {
+    return this.http.get(`${this.api}/api/orders`);
+  }
 
-  const userEmail = currentUser?.email;
-  if (!userEmail) return;
-
-  allOrders[userEmail] = allOrders[userEmail] || [];
-  allOrders[userEmail].push(...items);
-
-  localStorage.setItem('orders', JSON.stringify(allOrders));
-}
-
-
-  clearOrders() {
-    localStorage.removeItem(this.ordersKey);
+  cancelOrder(id: number): Observable<any> {
+    return this.http.put(`${this.api}/api/orders/${id}/cancel`, {});
   }
 }
