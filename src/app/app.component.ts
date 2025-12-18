@@ -10,6 +10,9 @@ export class AppComponent {
   showLayout=true;
 
   constructor(private router: Router) {
+    // Clear any old localStorage tokens (migration to HTTP-only cookies)
+    this.clearOldTokens();
+    
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const url = event.urlAfterRedirects;
@@ -18,5 +21,12 @@ export class AppComponent {
         this.showLayout = !(hideForAuth || hideForAdmin);
       }
     });
+  }
+
+  private clearOldTokens(): void {
+    // Remove any old token storage from localStorage (migrated to HTTP-only cookies)
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('token');
+    localStorage.removeItem('authToken');
   }
 }

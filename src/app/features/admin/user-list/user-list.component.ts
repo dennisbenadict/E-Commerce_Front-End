@@ -63,4 +63,31 @@ export class UserListComponent implements OnInit {
       }
     });
   }
+
+  cancelOrder(order: any) {
+    const orderId = order.id ?? order.Id;
+    if (!orderId) {
+      this.toastr.error('Invalid order');
+      return;
+    }
+
+    if (confirm('Are you sure you want to cancel this order?')) {
+      this.ordersService.adminCancelOrder(orderId).subscribe({
+        next: () => {
+          this.toastr.success('Order cancelled successfully');
+          if (this.selectedUser) {
+            this.loadUserOrders(this.selectedUser.id ?? this.selectedUser.Id);
+          }
+        },
+        error: (err) => {
+          this.toastr.error(err.error?.message || 'Failed to cancel order');
+        }
+      });
+    }
+  }
+
+  canCancel(order: any): boolean {
+    const status = ((order.status ?? order.Status) || '').toLowerCase();
+    return status === 'pending' || status === 'processing';
+  }
 }

@@ -1,16 +1,32 @@
-<div class="orders" *ngIf="orders.length; else noOrders">
+<div class="orders-wrapper">
   <h2>My Orders</h2>
-  <div *ngFor="let o of orders" class="order-card">
-    <div>
-      <h3>Order #{{ o.id ?? o.Id }}</h3>
-      <p>Total: ₹{{ o.totalAmount ?? o.TotalAmount }}</p>
-      <p>Status: {{ o.status ?? o.Status }}</p>
-      <p>Placed: {{ o.createdAt ?? o.CreatedAt }}</p>
+  
+  <div *ngIf="loading" class="loading">
+    <p>Loading orders...</p>
+  </div>
+
+  <div *ngIf="!loading && orders.length > 0" class="orders-list">
+    <div *ngFor="let o of orders" class="order-card">
+      <div class="order-info">
+        <h3>Order #{{ o.id ?? o.Id }}</h3>
+        <p class="order-total">Total: ₹{{ o.totalAmount ?? o.TotalAmount }}</p>
+        <p class="order-status">
+          Status: <span [class.status-pending]="(o.status ?? o.Status || '').toLowerCase() === 'pending'"
+                       [class.status-cancelled]="(o.status ?? o.Status || '').toLowerCase() === 'cancelled'"
+                       [class.status-completed]="(o.status ?? o.Status || '').toLowerCase() === 'completed'">
+            {{ o.status ?? o.Status }}
+          </span>
+        </p>
+        <p class="order-date">Placed: {{ (o.createdAt ?? o.CreatedAt) | date:'short' }}</p>
+      </div>
+      <div class="order-actions" *ngIf="canCancel(o)">
+        <button class="cancel-btn" (click)="cancelOrder(o)">Cancel Order</button>
+      </div>
     </div>
   </div>
-</div>
 
-<ng-template #noOrders>
-  <p>You have no orders yet.</p>
-</ng-template>
+  <div *ngIf="!loading && orders.length === 0" class="no-orders">
+    <p>You have no orders yet.</p>
+  </div>
+</div>
 

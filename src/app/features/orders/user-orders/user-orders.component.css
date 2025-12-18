@@ -1,0 +1,150 @@
+.orders-wrapper {
+  background-color: #000;
+  color: white;
+  padding: 40px;
+  font-family: 'Poppins', sans-serif;
+  min-height: 90vh;
+}
+
+h2 {
+  color: #ff3b3b;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #bbb;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.order-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0f0f0f;
+  border: 1px solid #222;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(255, 59, 59, 0.15);
+}
+
+.order-info {
+  flex: 1;
+}
+
+.order-info h3 {
+  color: #ff3b3b;
+  margin: 0 0 12px 0;
+  font-size: 20px;
+}
+
+.order-info p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #eee;
+}
+
+.order-total {
+  font-weight: bold;
+  font-size: 18px;
+  color: #fff;
+}
+
+.order-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.order-status span {
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.status-pending {
+  background-color: #ffa500;
+  color: #000;
+}
+
+.status-cancelled {
+  background-color: #b22222;
+  color: #fff;
+}
+
+.status-completed {
+  background-color: #228b22;
+  color: #fff;
+}
+
+.order-date {
+  color: #bbb;
+  font-size: 14px;
+}
+
+.order-actions {
+  margin-left: 20px;
+}
+
+.cancel-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #b22222, #8b0000);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.cancel-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(178, 34, 34, 0.4);
+}
+
+.cancel-btn:active {
+  transform: translateY(0);
+}
+
+.no-orders {
+  text-align: center;
+  padding: 60px 20px;
+  color: #bbb;
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .order-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .order-actions {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .cancel-btn {
+    width: 100%;
+  }
+}
+
