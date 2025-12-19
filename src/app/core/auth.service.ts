@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap, catchError, throwError, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 interface LoginResponse {
@@ -24,8 +24,6 @@ interface LoginRequest {
 })
 export class AuthService {
   private readonly api = environment.apiUrl;
-  private isRefreshing = false;
-  private refreshTokenSubject: any = null;
 
   constructor(private http: HttpClient) {
     // Clear any old localStorage tokens (migration from localStorage to cookies)
@@ -94,9 +92,4 @@ export class AuthService {
     return true; // Will be determined by API responses
   }
 
-  getUserRole(): string | null {
-    // Since token is in HTTP-only cookie, we can't decode it in frontend
-    // Role will be determined from API responses
-    return null;
-  }
 }
