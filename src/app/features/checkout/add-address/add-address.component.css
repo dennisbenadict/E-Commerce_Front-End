@@ -1,114 +1,243 @@
 .address-page {
-  padding: 16px;
+  padding: var(--spacing-xxl) var(--spacing-lg);
   color: inherit;
+  background: var(--gradient-soft);
+  min-height: calc(100vh - 200px);
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.address-page h2 {
+  text-align: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 30px;
+  letter-spacing: -0.5px;
 }
 
 .address-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
+  margin-bottom: 40px;
 }
 
 .address-card {
   display: flex;
   justify-content: space-between;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 10px;
-  background: #fff;
+  align-items: center;
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+  animation: slideIn 0.4s ease-out;
+}
+
+.address-card:hover {
+  transform: translateX(8px);
+  border-color: var(--sky-blue);
+  box-shadow: var(--shadow-md);
+}
+
+.address-card > div:first-child {
+  flex: 1;
+}
+
+.address-card p {
+  margin: 6px 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: var(--text-medium);
+  line-height: 1.5;
+}
+
+.address-card p strong {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--comet-black);
 }
 
 .address-card .phone {
-  color: #555;
+  color: #888;
+  font-size: 14px;
 }
 
 .actions button {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #1976d2;
-  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--gradient-primary);
+  color: var(--white);
   cursor: pointer;
+  font-weight: 700;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: var(--transition-normal);
+  white-space: nowrap;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  box-shadow: var(--shadow-sm);
+}
+
+.actions button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  filter: brightness(1.05);
 }
 
 .divider {
-  height: 1px;
-  background: #e0e0e0;
-  margin: 16px 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #e0e0e0, transparent);
+  margin: 40px 0;
+  border: none;
 }
 
 .address-form {
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 12px;
-  background: #fff;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: var(--spacing-xxl);
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 2px solid var(--sky-blue-lighter);
+  animation: scaleIn 0.5s ease-out;
 }
 
 .address-form h3 {
-  margin-top: 0;
-  color: #333;
-}
-
-.address-form input {
-  width: 100%;
-  padding: 10px 12px;
-  margin: 8px 0;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background: #fff;
-  color: #222;
-}
-
-.address-form button {
-  padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #1976d2;
-  color: #fff;
-  cursor: pointer;
-  width: 100%;
-}
-.address-form {
-  max-width: 500px;
-  margin: 40px auto;
-  padding: 30px;
-  background-color: #f8f8f8;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
-
-.address-form h2 {
   text-align: center;
-  margin-bottom: 25px;
-  font-family: 'Poppins', sans-serif;
+  margin-top: 0;
+  margin-bottom: 30px;
+  color: var(--text-primary);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
 }
 
 .address-form form {
   display: flex;
   flex-direction: column;
+  gap: 4px;
 }
 
 .address-form input {
-  padding: 12px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  width: 100%;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  border: 2px solid #e0e0e0;
+  background: #ffffff;
+  color: #1a1a1a;
   font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.address-form input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: var(--shadow-blue);
+  transform: scale(1.01);
+}
+
+.address-form input::placeholder {
+  color: #999;
 }
 
 .address-form button {
-  background-color: black;
-  color: white;
-  padding: 12px;
+  background: var(--gradient-primary);
+  color: var(--white);
+  padding: var(--spacing-md);
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 700;
   cursor: pointer;
-  transition: 0.3s;
+  transition: var(--transition-normal);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: 0.5px;
+  margin-top: var(--spacing-xs);
+  box-shadow: var(--shadow-md);
 }
 
 .address-form button:hover {
-  background-color: red;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  filter: brightness(1.05);
+}
+
+.no-address {
+  text-align: center;
+  padding: 40px;
+  color: #888;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .address-page {
+    padding: 30px 15px;
+  }
+
+  .address-page h2 {
+    font-size: 28px;
+  }
+
+  .address-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+
+  .address-form {
+    padding: 30px 24px;
+  }
+
+  .address-form h3 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .address-page h2 {
+    font-size: 24px;
+  }
+
+  .address-card {
+    padding: 16px;
+  }
+
+  .address-card p {
+    font-size: 14px;
+  }
+
+  .address-card p strong {
+    font-size: 16px;
+  }
+
+  .address-form {
+    padding: 24px 20px;
+  }
+
+  .address-form input {
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+
+  .address-form button {
+    padding: 14px;
+    font-size: 16px;
+  }
 }
 

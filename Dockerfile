@@ -1,12 +1,16 @@
 # Stage 1: Build Angular application
 FROM node:18-alpine AS build
+
+# Set NODE_OPTIONS to increase memory limit for build
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+
 WORKDIR /app
 
-# Copy package files
+# Copy package files first for better caching
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm ci --legacy-peer-deps || npm install
 
 # Copy source code
 COPY . .

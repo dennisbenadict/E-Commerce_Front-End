@@ -1,45 +1,63 @@
 .footer {
-  background-color: #000;
-  color: white;
-  padding: 40px 20px;
-  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+  color: var(--white);
+  padding: var(--spacing-xxl) var(--spacing-xxl) var(--spacing-xxl);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  border-top: 3px solid var(--sky-blue);
+  box-shadow: 0 -4px 20px rgba(74, 144, 226, 0.1);
 }
 
 .footer-top {
   display: flex;
   justify-content: space-around;
   gap: 40px;
-  font-weight: 500;
-  font-size: 16px;
-  padding-bottom: 20px;
+  font-weight: 600;
+  font-size: 18px;
+  padding-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.footer-top h1 {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--white);
+  letter-spacing: -0.3px;
 }
 
 hr {
-  border: 1px solid #444;
-  margin: 20px 0;
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #444, transparent);
+  margin: 30px 0;
 }
 
 .footer-links {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 30px;
-  margin-top: 20px;
+  gap: 40px;
+  margin-top: 30px;
 }
 
 .footer-column {
   flex: 1;
-  min-width: 200px;
+  min-width: 220px;
 }
 
 .footer-column h2 {
   display: flex;
   justify-content: center;
-  font-weight: bold;
-  margin-bottom: 10px;
-  letter-spacing: 1px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  letter-spacing: -0.3px;
+  font-size: 18px;
+  color: var(--white);
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
-
 
 .footer-column ul {
   list-style: none;
@@ -47,33 +65,147 @@ hr {
 }
 
 .footer-column ul li {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   font-size: 14px;
   cursor: pointer;
   display: flex;
   justify-content: center;
+  transition: var(--transition-normal);
+  padding: 4px 0;
+  color: var(--gray-300);
+}
+
+.footer-column ul li:hover {
+  color: var(--sky-blue);
+  transform: translateX(4px);
 }
 
 .footer-column input {
-  width: 50vh;
-  height: 5vh;
-  margin-top: 10px;
-  border: none;
+  width: 100%;
+  max-width: 300px;
+  padding: 14px 18px;
+  margin-top: 12px;
+  border: 2px solid var(--gray-600);
+  border-radius: var(--radius-md);
   font-size: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: var(--transition-normal);
+}
+
+.footer-column input:focus {
+  outline: none;
+  border-color: var(--sky-blue);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.2);
+}
+
+.footer-column input::placeholder {
+  color: var(--gray-400);
 }
 
 .footer-column button {
-  background-color: red;
-  color: white;
-  padding: 10px;
-  margin-top: 10px;
+  background: var(--gradient-primary);
+  color: var(--white);
+  padding: 14px var(--spacing-lg);
+  margin-top: var(--spacing-sm);
   border: none;
-  width: 50vh;
+  width: 100%;
+  max-width: 300px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 700;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  border-radius: var(--radius-md);
+  transition: var(--transition-normal);
+  letter-spacing: 0.5px;
+  font-size: 15px;
+  box-shadow: var(--shadow-sm);
 }
 
-.hey{
+.footer-column button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  filter: brightness(1.1);
+}
+
+.hey {
   text-align: center;
+}
+
+.hey p {
+  color: #cccccc;
+  font-size: 13px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .footer {
+    padding: 50px 30px 30px;
+  }
+
+  .footer-links {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 40px 20px 30px;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+
+  .footer-top h1 {
+    font-size: 18px;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .footer-column {
+    text-align: center;
+  }
+
+  .footer-column input,
+  .footer-column button {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 30px 15px 20px;
+  }
+
+  .footer-top h1 {
+    font-size: 16px;
+  }
+
+  .footer-column h2 {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .footer-column ul li {
+    font-size: 13px;
+  }
+
+  .footer-column input {
+    padding: 12px 16px;
+  }
+
+  .footer-column button {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
 }
 

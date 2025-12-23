@@ -1,17 +1,170 @@
+/* ============================================
+   UNIFIED DESIGN SYSTEM - VINTAGELY
+   ============================================ */
+
+:root {
+  /* Sky Blue Theme Colors */
+  --sky-blue: #87CEEB;
+  --sky-blue-light: #B0E0E6;
+  --sky-blue-lighter: #E0F6FF;
+  --sky-blue-dark: #5F9EA0;
+  --sky-blue-darker: #4682B4;
+  
+  /* Primary Colors */
+  --primary: #4A90E2;
+  --primary-light: #6BA3E8;
+  --primary-dark: #357ABD;
+  
+  /* Accent Colors */
+  --accent: #00B4D8;
+  --accent-light: #48CAE4;
+  --success: #00C896;
+  --warning: #FFB800;
+  --error: #FF6B6B;
+  
+  /* Neutral Colors */
+  --white: #FFFFFF;
+  --gray-50: #F8F9FA;
+  --gray-100: #F1F3F5;
+  --gray-200: #E9ECEF;
+  --gray-300: #DEE2E6;
+  --gray-400: #CED4DA;
+  --gray-500: #ADB5BD;
+  --gray-600: #868E96;
+  --gray-700: #495057;
+  --gray-800: #343A40;
+  --gray-900: #212529;
+  
+  /* Text Colors */
+  --text-primary: #1A1A2E;
+  --text-secondary: #495057;
+  --text-tertiary: #868E96;
+  
+  /* Backgrounds */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F8F9FA;
+  --bg-accent: #E0F6FF;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #4A90E2 0%, #00B4D8 100%);
+  --gradient-soft: linear-gradient(135deg, #E0F6FF 0%, #FFFFFF 100%);
+  --gradient-sky: linear-gradient(135deg, #87CEEB 0%, #B0E0E6 100%);
+  
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(74, 144, 226, 0.05);
+  --shadow-sm: 0 2px 8px rgba(74, 144, 226, 0.08);
+  --shadow-md: 0 4px 16px rgba(74, 144, 226, 0.12);
+  --shadow-lg: 0 8px 24px rgba(74, 144, 226, 0.16);
+  --shadow-xl: 0 12px 32px rgba(74, 144, 226, 0.2);
+  --shadow-blue: 0 4px 20px rgba(74, 144, 226, 0.25);
+  
+  /* Spacing */
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  --spacing-xxxl: 64px;
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
 
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
-html,body{
-    height: 100%;
-    width: 100%;
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
 }
+
+/* Smooth Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.4s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out;
+}
+
+/* Import Modern Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
 
 .toast-success {
-  background-color: #2196f3 !important;
-  color: #fff !important;
-  font-weight: bold;
+  background: var(--gradient-primary) !important;
+  color: var(--white) !important;
+  font-weight: 600 !important;
+  box-shadow: var(--shadow-red) !important;
 }
 
 

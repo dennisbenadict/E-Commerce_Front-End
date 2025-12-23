@@ -1,16 +1,23 @@
 .orders-wrapper {
-  background-color: #000;
-  color: white;
-  padding: 40px;
-  font-family: 'Poppins', sans-serif;
-  min-height: 90vh;
+  background: var(--gradient-soft);
+  color: var(--text-primary);
+  padding: var(--spacing-xxl);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: calc(100vh - 200px);
+  animation: fadeIn 0.6s ease-out;
 }
 
 h2 {
-  color: #ff3b3b;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-align: center;
-  margin-bottom: 30px;
-  font-size: 28px;
+  margin-bottom: var(--spacing-xl);
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .loading {
@@ -31,17 +38,19 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #0f0f0f;
-  border: 1px solid #222;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--white);
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+  animation: slideIn 0.4s ease-out;
 }
 
 .order-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(255, 59, 59, 0.15);
+  transform: translateX(8px);
+  border-color: var(--sky-blue);
+  box-shadow: var(--shadow-md);
 }
 
 .order-info {
@@ -49,21 +58,28 @@ h2 {
 }
 
 .order-info h3 {
-  color: #ff3b3b;
-  margin: 0 0 12px 0;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-sm) 0;
   font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .order-info p {
   margin: 8px 0;
-  font-size: 16px;
-  color: #eee;
+  font-size: 15px;
+  color: var(--text-secondary);
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .order-total {
-  font-weight: bold;
+  font-weight: 800;
   font-size: 18px;
-  color: #fff;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .order-status {
@@ -86,12 +102,12 @@ h2 {
 
 .status-cancelled {
   background-color: #b22222;
-  color: #fff;
+  color: var(--white);
 }
 
 .status-completed {
   background-color: #228b22;
-  color: #fff;
+  color: var(--white);
 }
 
 .order-date {
@@ -104,20 +120,24 @@ h2 {
 }
 
 .cancel-btn {
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #b22222, #8b0000);
-  color: white;
+  padding: 10px var(--spacing-lg);
+  background: var(--error);
+  color: var(--white);
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 14px;
-  transition: transform 0.1s ease, box-shadow 0.2s ease;
+  transition: var(--transition-normal);
+  letter-spacing: 0.3px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  box-shadow: var(--shadow-sm);
 }
 
 .cancel-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(178, 34, 34, 0.4);
+  background: #FF5252;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .cancel-btn:active {
