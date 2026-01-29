@@ -39,7 +39,8 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync dist/ s3://$S3_BUCKET_NAME --delete
+          aws s3 sync dist/ecommerce/ s3://$S3_BUCKET_NAME --delete
+
 
       - name: Invalidate CloudFront cache
         run: |
